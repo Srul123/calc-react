@@ -9,24 +9,21 @@ class App extends Component {
         inputA: 0,
         inputB: 0
     };
-    onSearchSubmit1 = (term: any) => {
-        this.setState((state, props) => ({
-            inputA: term
-        }));
+    onInput = (key: string, value: number) => {
+        if(key === 'Input A'){
+            this.setState({inputA: value});
+        }else {
+            this.setState({inputB: value});
+        }
     };
-
-    onSearchSubmit2 = (term: any) => {
-        this.setState({inputB: term});
-    };
-
     render() {
         console.log(this.state);
         return (
             <div className="ui container App">
-                <InputA name={'Input A'} inputA={this.onSearchSubmit1} inputB=""/>
-                <InputA name={'Input B'} inputA="" inputB={this.onSearchSubmit2}/>
-                <Sum output1={this.state.inputA} output2={this.state.inputB}/>
-                < Mul   output1={this.state.inputA} output2={this.state.inputB}  />
+                <InputA name={'Input A'} onInput={this.onInput} />
+                <InputA name={'Input B'} onInput={this.onInput}/>
+                <Sum ans={Number(this.state.inputA) + Number(this.state.inputB)}/>
+                < Mul valueA={this.state.inputA} valueB={this.state.inputB} />
             </div>
         );
     }
